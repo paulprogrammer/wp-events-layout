@@ -2,3 +2,8 @@
   max-width: 800px;
   width: 100%;
 }
+.events-container img {
+  position: relative;
+  max-width: 100%;
+  height: auto;
+}
