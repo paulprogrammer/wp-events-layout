@@ -39,7 +39,7 @@ function wpel_query_event () {
     }
   }
 
-  return $array;
+  return $events;
 }
 
 function wpel_query_mep_events () {
@@ -66,7 +66,7 @@ function wpel_query_mep_events () {
       $postdata['permalink'] = get_post_permalink($post);
       $postdata['thumbnail'] = get_the_post_thumbnail($post);
       $postdata['title'] = get_the_title();
-      $postdata['date'] = date_create_from_format( 'Y-m-d H:i:s', $post->mep_event_start_date );
+      $postdata['date'] = date_create_from_format( 'Y-m-d H:i', $post->mep_event_start_date );
 
       $events[] = $postdata; 
     }
@@ -83,8 +83,8 @@ function date_comparison($a, $b) {
 }
 
 function wpel_display_event($atts = []) {
-  // normalize attribute keys, lowercase
-  //$atts = array_change_key_case((array)$atts, CASE_LOWER);
+  // enqueue our CSS for display...
+  wp_enqueue_style('wpel-style', get_stylesheet_uri());
 
   // first search for posts from the 'events' plugin
   $events = wpel_query_event();
@@ -97,12 +97,14 @@ function wpel_display_event($atts = []) {
 
   echo "<div class='events-container'>";
   foreach( $events as $event) {
+    echo "<div class='event'>";
     echo "<div class='link'><a href='".$event['permalink']."'>".$event['title']."</a></div>";
     echo "<div class='thumbnail'>".$event['thumbnail']."</div>";
     $month = date_format($event['date'], 'M');
     $day = date_format($event['date'], 'd');
     $year = date_format($event['date'], 'Y');
     echo "<div class='date'><span class='month'>$month</span><span class='day'>$day</span><span class='year'>$year</span></div>";
+    echo "</div>";
   }
   echo "</div>";
 
