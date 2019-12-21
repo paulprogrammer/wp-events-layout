@@ -1,16 +1,23 @@
+$box-size: 200px;
+
 .events-container {
 	max-width: 800px;
 	width: 100%;
 	display:flex;
+	justify-content: space-betwen;
+	align-content: space-between;
+	margin:auto;
 
 	event {
 		flex-direction: row;
 		position: relative;
-		width: 200px;
+		width: $box-size;
+		height: $box-size+100;
 		img {
 			position:relative;
 			max-width: 100%;
-			height:auto;
+			height: $box-size;
+			object-fit:cover;
 		}
 	}
 
