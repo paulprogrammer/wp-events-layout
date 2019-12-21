@@ -84,7 +84,7 @@ function date_comparison($a, $b) {
 
 function wpel_display_event($atts = []) {
   // enqueue our CSS for display...
-  wp_enqueue_style('wpel-style', get_stylesheet_uri());
+  wp_enqueue_style('wpel-style', plugin_dir_url(__FILE__).'style.css');
 
   // first search for posts from the 'events' plugin
   $events = wpel_query_event();
