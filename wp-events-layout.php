@@ -14,6 +14,7 @@ function wpel_display_event($atts = []) {
 
   $query = new WP_Query( array(
     'post_type' => 'event',
+    'scope' => 'future',
     'tax_query' => array( array( 
       'taxonomy' => 'event-categories',
       'field' => 'slug',
@@ -49,7 +50,7 @@ function wpel_display_event($atts = []) {
     echo '<ul>';
     while ( $query->have_posts() ) {
       $query->the_post();
-      echo '<li>' . get_the_title() . '</li>';
+      echo '<li>' . get_the_title() . ': ' . $post->mep_event_start_date . '</li>';
     }
     echo '</ul>';
   } else {
