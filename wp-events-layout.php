@@ -12,6 +12,7 @@ function wpel_display_event($atts = []) {
   // normalize attribute keys, lowercase
   $atts = array_change_key_case((array)$atts, CASE_LOWER);
 
+  // first search for posts from the 'events' plugin
   $query = new WP_Query( array(
     'post_type' => 'event',
     'scope' => 'future',
@@ -29,16 +30,15 @@ function wpel_display_event($atts = []) {
     while ( $query->have_posts() ) {
       $query->the_post();
       $post = get_post();
-      echo '<li>' . get_the_title() . ': ' . $post->mep_event_start_date . '</li>';
+      echo '<li>' . get_post_permalink($post) . get_the_post_thumbnail($post) . get_the_title() . ': ' . $post->_event_start . '</li>';
     }
     echo '</ul>';
-  } else {
-      // no posts found
   }
-  
+
+  // now search for events from the 'mep_events' plugin
   $query = new WP_Query( array(
     'post_type' => 'mep_events',
-    'tax_query' => array( array( 
+    'tax_query' => array( array(
       'taxonomy' => 'mep_cat',
       'field' => 'slug',
       'terms' => 'tournament'
@@ -46,16 +46,15 @@ function wpel_display_event($atts = []) {
     'order' => 'ASC',
     'orderby' => 'date-time',
   ) );
-  
+
   if ( $query->have_posts() ) {
     echo '<ul>';
     while ( $query->have_posts() ) {
       $query->the_post();
-      echo '<li>' . get_the_title() . ': ' . $post->mep_event_start_date . '</li>';
+      $post = get_post();
+      echo '<li>' . get_post_permalink($post) . get_the_post_thumbnail($post) . get_the_title() . ': ' . $post->mep_event_start_date . '</li>';
     }
     echo '</ul>';
-  } else {
-      // no posts found
   }
   
   // clean up after my query mess
