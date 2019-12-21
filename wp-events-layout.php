@@ -28,7 +28,8 @@ function wpel_display_event($atts = []) {
     echo '<ul>';
     while ( $query->have_posts() ) {
       $query->the_post();
-      echo '<li>' . get_the_title() . '</li>';
+      $post = get_post();
+      echo '<li>' . get_the_title() . ': ' . $post->mep_event_start_date . '</li>';
     }
     echo '</ul>';
   } else {
