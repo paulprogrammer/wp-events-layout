@@ -8,7 +8,7 @@ $box-size: 200px;
 	align-content: space-between;
 	margin:auto;
 
-	event {
+	.event {
 		flex-direction: row;
 		position: relative;
 		width: $box-size;
