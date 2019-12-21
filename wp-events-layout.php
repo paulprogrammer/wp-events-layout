@@ -14,7 +14,7 @@ function wpel_display_event($atts = []) {
 
   $query = new WP_Query( array(
     'post_type' => 'event',
-    'tax' => array( array( 
+    'tax_query' => array( array( 
       'taxonomy' => 'event-categories',
       'field' => 'slug',
       'terms' => 'tournament'
