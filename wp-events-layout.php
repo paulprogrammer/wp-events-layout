@@ -77,7 +77,7 @@ function wpel_query_mep_events () {
 
 function date_comparison($a, $b) {
   if( $a['date'] == $b['date']) {
-    return 0
+    return 0;
   }
   return $a['date'] < $b['date'] ? -1 : 1;
 }
