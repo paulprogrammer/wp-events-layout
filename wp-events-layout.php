@@ -14,6 +14,7 @@ function wpel_display_event($atts = []) {
 
   $query = new WP_Query( array(
     'post_type' => 'event',
+    'cat' => '900,907',
     'order' => 'ASC',
     'orderby' => 'date-time',
   ) );
