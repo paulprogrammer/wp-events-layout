@@ -1,8 +1,14 @@
 .events-container {
   max-width: 800px;
   width: 100%;
+  display: flex;
 }
-.events-container img {
+.events-container event {
+  flex-direction: row;
+  position: relative;
+  width: 200px;
+}
+.events-container event img {
   position: relative;
   max-width: 100%;
   height: auto;

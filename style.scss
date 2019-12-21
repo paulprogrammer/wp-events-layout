@@ -1,10 +1,17 @@
 .events-container {
 	max-width: 800px;
 	width: 100%;
+	display:flex;
 
-	img {
-		position:relative;
-		max-width: 100%;
-		height:auto;
+	event {
+		flex-direction: row;
+		position: relative;
+		width: 200px;
+		img {
+			position:relative;
+			max-width: 100%;
+			height:auto;
+		}
 	}
+
 }
