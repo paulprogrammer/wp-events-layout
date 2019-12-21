@@ -34,6 +34,28 @@ function wpel_display_event($atts = []) {
       // no posts found
   }
   
+  $query = new WP_Query( array(
+    'post_type' => 'mep_events',
+    'tax_query' => array( array( 
+      'taxonomy' => 'mep_cat',
+      'field' => 'slug',
+      'terms' => 'tournament'
+    )),
+    'order' => 'ASC',
+    'orderby' => 'date-time',
+  ) );
+  
+  if ( $query->have_posts() ) {
+    echo '<ul>';
+    while ( $query->have_posts() ) {
+      $query->the_post();
+      echo '<li>' . get_the_title() . '</li>';
+    }
+    echo '</ul>';
+  } else {
+      // no posts found
+  }
+  
   // clean up after my query mess
   wp_reset_postdata();
 }
