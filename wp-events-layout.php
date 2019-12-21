@@ -8,11 +8,9 @@ Author: Paul Williams
 Author URI: https://github.com/paulprogrammer
 */
 
-function wpel_display_event($atts = []) {
-  // normalize attribute keys, lowercase
-  $atts = array_change_key_case((array)$atts, CASE_LOWER);
+function wpel_query_event () {
+  $events = array();
 
-  // first search for posts from the 'events' plugin
   $query = new WP_Query( array(
     'post_type' => 'event',
     'scope' => 'future',
@@ -26,16 +24,27 @@ function wpel_display_event($atts = []) {
   ) );
   
   if ( $query->have_posts() ) {
-    echo '<ul>';
     while ( $query->have_posts() ) {
+      $postdata = array();
+
       $query->the_post();
       $post = get_post();
-      echo '<li>' . get_post_permalink($post) . get_the_post_thumbnail($post) . get_the_title() . ': ' . $post->_event_start . '</li>';
+
+      $postdata['permalink'] = get_post_permalink($post);
+      $postdata['thumbnail'] = get_the_post_thumbnail($post);
+      $postdata['title'] = get_the_title();
+      $postdata['date'] = date_create_from_format( 'Y-m-d H:i:s', $post->_event_start);
+
+      $events[] = $postdata;
     }
-    echo '</ul>';
   }
 
-  // now search for events from the 'mep_events' plugin
+  return $array;
+}
+
+function wpel_query_mep_events () {
+  $events = array();
+
   $query = new WP_Query( array(
     'post_type' => 'mep_events',
     'tax_query' => array( array(
@@ -48,15 +57,55 @@ function wpel_display_event($atts = []) {
   ) );
 
   if ( $query->have_posts() ) {
-    echo '<ul>';
     while ( $query->have_posts() ) {
+      $postdata = array();
+
       $query->the_post();
       $post = get_post();
-      echo '<li>' . get_post_permalink($post) . get_the_post_thumbnail($post) . get_the_title() . ': ' . $post->mep_event_start_date . '</li>';
+
+      $postdata['permalink'] = get_post_permalink($post);
+      $postdata['thumbnail'] = get_the_post_thumbnail($post);
+      $postdata['title'] = get_the_title();
+      $postdata['date'] = date_create_from_format( 'Y-m-d H:i:s', $post->mep_event_start_date );
+
+      $events[] = $postdata; 
     }
-    echo '</ul>';
   }
-  
+
+  return $events;
+}
+
+function date_comparison($a, $b) {
+  if( $a['date'] == $b['date']) {
+    return 0
+  }
+  return $a['date'] < $b['date'] ? -1 : 1;
+}
+
+function wpel_display_event($atts = []) {
+  // normalize attribute keys, lowercase
+  //$atts = array_change_key_case((array)$atts, CASE_LOWER);
+
+  // first search for posts from the 'events' plugin
+  $events = wpel_query_event();
+
+  // now search for events from the 'mep_events' plugin
+  $events = array_merge($events, wpel_query_mep_events());
+
+  // sort by date in the value
+  uasort($events, 'date_comparison');
+
+  echo "<div class='events-container'>";
+  foreach( $events as $event) {
+    echo "<div class='link'><a href='".$event['permalink']."'>".$event['title']."</a></div>";
+    echo "<div class='thumbnail'>".$event['thumbnail']."</div>";
+    $month = date_format($event['date'], 'M');
+    $day = date_format($event['date'], 'd');
+    $year = date_format($event['date'], 'Y');
+    echo "<div class='date'><span class='month'>$month</span><span class='day'>$day</span><span class='year'>$year</span></div>";
+  }
+  echo "</div>";
+
   // clean up after my query mess
   wp_reset_postdata();
 }
