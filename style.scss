@@ -1,4 +1,5 @@
 $box-size: 200px;
+$calendar-size: 50px;
 
 .events-container {
 	max-width: 800px;
@@ -9,15 +10,38 @@ $box-size: 200px;
 	margin:auto;
 
 	.event {
-		flex-direction: row;
-		position: relative;
+		flex-direction: column;
+		justify-content: center;
 		width: $box-size;
 		height: $box-size+100;
+		display:flex;
+		position:relative;
+		align-content:center;
+		.date {
+			display: flex;
+			position:absolute;
+			flex-direction:column;
+			background:white;
+			line-height: 1.1;
+			text-align:center;
+			margin-left: ($box-size - $calendar-size) / 2;
+			width: $calendar-size;
+			bottom: 0;
+		}
 		img {
 			position:relative;
 			max-width: 100%;
 			height: $box-size;
 			object-fit:cover;
+		}
+		.link {
+			height: 3.5em;
+			position:relative;
+			a {
+				position:absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
 		}
 	}
 
