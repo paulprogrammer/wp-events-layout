@@ -98,6 +98,7 @@ function wpel_display_event($atts = []) {
 
   echo "<div class='events-container'>";
   foreach( $events as $event) {
+    echo "<a href='".$event['permalink']."'>";
     echo "<div class='event'>";
     echo "<div class='link'><a href='".$event['permalink']."'>".$event['title']."</a></div>";
     echo "<div class='thumbnail'>".$event['thumbnail']."</div>";
@@ -106,6 +107,7 @@ function wpel_display_event($atts = []) {
     $year = date_format($event['date'], 'Y');
     echo "<div class='date'><span class='month'>$month</span><span class='day'>$day</span><span class='year'>$year</span></div>";
     echo "</div>";
+    echo "</a>";
   }
   echo "</div>";
 
