@@ -5,7 +5,7 @@ $calendar-size: 50px;
 	max-width: 800px;
 	width: 100%;
 	display:flex;
-	justify-content: space-betwen;
+	justify-content: space-between;
 	align-content: space-between;
 	margin:auto;
 
@@ -27,6 +27,7 @@ $calendar-size: 50px;
 			margin-left: ($box-size - $calendar-size) / 2;
 			width: $calendar-size;
 			bottom: 0;
+			font-family: 'Source Code Pro', monospace
 		}
 		img {
 			position:relative;
