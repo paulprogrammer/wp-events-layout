@@ -1,5 +1,6 @@
 $box-size: 200px;
-$calendar-size: 50px;
+$calendar-size: 60px;
+$haa-color: #4a0;
 
 .events-container {
 	max-width: 800px;
@@ -26,8 +27,26 @@ $calendar-size: 50px;
 			text-align:center;
 			margin-left: ($box-size - $calendar-size) / 2;
 			width: $calendar-size;
-			bottom: 0;
-			font-family: 'Source Code Pro', monospace
+			bottom: -1px;
+			font-family: 'Source Code Pro', monospace;
+			border-radius: 5px;
+			border: 3px solid $haa-color;
+			.month {
+				background: $haa-color;
+				font-weight: 900;
+				font-size: 12px;
+				color:white;
+				padding-bottom:3px;
+			}
+			.day {
+				font-size: 30px;
+				font-weight: 900;
+			}
+			.year {
+				background: $haa-color;
+				font-size: 10px;
+				padding-top: 3px;
+			}
 		}
 		img {
 			position:relative;
