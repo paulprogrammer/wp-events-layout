@@ -86,6 +86,7 @@ function wpel_display_event($atts = []) {
   // enqueue our CSS for display...
   wp_enqueue_style('source-code-pro', 'https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700,900&display=swap');
   wp_enqueue_style('wpel-style', plugin_dir_url(__FILE__).'style.css');
+  wp_enqueue_script('wpel-script', plugin_dir_url(__FILE__).'wpel.js');
 
   // first search for posts from the 'events' plugin
   $events = wpel_query_event();
@@ -98,16 +99,14 @@ function wpel_display_event($atts = []) {
 
   echo "<div class='events-container'>";
   foreach( $events as $event) {
-    echo "<a href='".$event['permalink']."'>";
     echo "<div class='event'>";
-    echo "<div class='link'>".$event['title']."</div>";
+    echo "<div class='link'><a href='".$event['permalink']."'>".$event['title']."</a></div>";
     echo "<div class='thumbnail'>".$event['thumbnail']."</div>";
     $month = date_format($event['date'], 'M');
     $day = date_format($event['date'], 'd');
     $year = date_format($event['date'], 'Y');
     echo "<div class='date'><span class='month'>$month</span><span class='day'>$day</span><span class='year'>$year</span></div>";
     echo "</div>";
-    echo "</a>";
   }
   echo "</div>";
 
