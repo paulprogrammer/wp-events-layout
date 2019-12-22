@@ -100,7 +100,7 @@ function wpel_display_event($atts = []) {
   foreach( $events as $event) {
     echo "<a href='".$event['permalink']."'>";
     echo "<div class='event'>";
-    echo "<div class='link'><a href='".$event['permalink']."'>".$event['title']."</a></div>";
+    echo "<div class='link'>".$event['title']."</div>";
     echo "<div class='thumbnail'>".$event['thumbnail']."</div>";
     $month = date_format($event['date'], 'M');
     $day = date_format($event['date'], 'd');
