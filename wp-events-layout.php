@@ -66,7 +66,8 @@ function wpel_query_mep_events () {
       $postdata['permalink'] = get_post_permalink($post);
       $postdata['thumbnail'] = get_the_post_thumbnail($post);
       $postdata['title'] = get_the_title();
-      $postdata['date'] = date_create_from_format( 'Y-m-d H:i', $post->mep_event_start_date );
+
+      $postdata['date'] = date_create_from_format( 'Y-m-d', $post->event_start_date );
 
       $events[] = $postdata; 
     }
