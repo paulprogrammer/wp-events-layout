@@ -9,6 +9,7 @@ $haa-color: #4a0;
 	justify-content: space-between;
 	align-content: space-between;
 	margin:auto;
+	flex-wrap: wrap;
 
 	.event {
 		cursor: pointer;
@@ -19,6 +20,7 @@ $haa-color: #4a0;
 		display:flex;
 		position:relative;
 		align-content:center;
+		margin: 20px;
 		.date {
 			display: flex;
 			position:absolute;
@@ -47,6 +49,7 @@ $haa-color: #4a0;
 				background: $haa-color;
 				font-size: 10px;
 				padding-top: 3px;
+				color: white
 			}
 		}
 		img {

@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-content: space-between;
   margin: auto;
+  flex-wrap: wrap;
 }
 .events-container .event {
   cursor: pointer;
@@ -15,6 +16,7 @@
   display: flex;
   position: relative;
   align-content: center;
+  margin: 20px;
 }
 .events-container .event .date {
   display: flex;
@@ -45,6 +47,7 @@
   background: #4a0;
   font-size: 10px;
   padding-top: 3px;
+  color: white;
 }
 .events-container .event img {
   position: relative;
